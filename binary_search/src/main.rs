@@ -46,11 +46,7 @@ fn main() {
     let mut numbers: &[i32] = numbers.as_slice();
 
     match binary_search(&mut numbers, 2) {
-        Some(index) => {
-            println!("found!! index:{}", index);
-        }
-        None => {
-            println!("Not found");
-        }
+        Some(index) => println!("found!! index:{}", index),
+        None => println!("Not found"),
     }
 }
