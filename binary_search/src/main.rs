@@ -3,14 +3,13 @@ use std::{
     io::{BufRead, BufReader},
 };
 
-fn binary_search(list: &[i32], current: i32) -> i32 {
+fn binary_search(list: &[i32], current: i32) -> Option<usize> {
     let mut current_index = list.len() / 2;
     let mut herf = current_index / 2;
 
     while list[current_index] != current {
         if herf == 0 {
-            print!("return");
-            return -1;
+            return None;
         }
 
         if list[current_index] < current {
@@ -24,7 +23,7 @@ fn binary_search(list: &[i32], current: i32) -> i32 {
         herf /= 2;
     }
 
-    current_index as i32
+    Some(current_index)
 }
 
 fn main() {
@@ -45,8 +44,13 @@ fn main() {
 
     numbers.sort();
     let mut numbers: &[i32] = numbers.as_slice();
-    println!("{:?}", numbers);
 
-    let index = binary_search(&mut numbers, 9);
-    println!("検索結果：{}", index);
+    match binary_search(&mut numbers, 2) {
+        Some(index) => {
+            println!("found!! index:{}", index);
+        }
+        None => {
+            println!("Not found");
+        }
+    }
 }
